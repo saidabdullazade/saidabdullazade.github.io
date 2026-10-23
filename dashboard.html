@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="az">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MediQ | İdarə paneli</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-page">
+  <header class="topbar"><a class="brand" href="dashboard.html"><span class="brand-mark">+</span><span>MediQ<small>KLİNİKA İDARƏETMƏSİ</small></span></a><div class="user-area"><span class="online-dot"></span><span class="user-name">Admin · doctor</span><span class="user-avatar">D</span><button id="logout" class="logout-button">Çıxış</button></div></header>
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="side-heading">İDARƏETMƏ</div>
+      <button class="side-link selected" data-section="overview"><span>⌂</span> İcmal</button>
+      <button class="side-link" data-section="patients"><span>♙</span> Pasiyentlər</button>
+      <button class="side-link" data-section="appointments"><span>▤</span> Növbələr</button>
+      <button class="side-link" data-section="doctors"><span>✚</span> Həkimlər</button>
+      <button class="side-link" data-section="schedule"><span>◷</span> Qəbul saatları</button>
+      <div class="sidebar-note"><span class="note-icon">i</span><p>Demo məlumatlar bu brauzerdə saxlanılır.</p></div>
+    </aside>
+    <main class="main-content">
+      <section class="page-section active" id="section-overview">
+        <div class="page-heading"><div><span class="eyebrow" id="date-label">KLİNİKA İCMALI</span><h1>İdarə paneli</h1><p>Bu gün klinikanızda baş verənlərə ümumi baxış.</p></div><button class="button primary-button" data-jump="appointments">＋ Yeni növbə</button></div>
+        <div class="metric-grid"><article class="metric-card"><span class="metric-label">Pasiyentlər</span><span class="metric-icon mint">♙</span><strong id="patient-count">0</strong><small>Qeydiyyatda olan pasiyentlər</small></article><article class="metric-card"><span class="metric-label">Aktiv növbələr</span><span class="metric-icon blue">▤</span><strong id="appointment-count">0</strong><small>Gözləyən və təsdiqlənən</small></article><article class="metric-card"><span class="metric-label">Həkimlər</span><span class="metric-icon lilac">✚</span><strong id="doctor-count">0</strong><small>Qəbul aparan mütəxəssislər</small></article><article class="metric-card"><span class="metric-label">Bu gün qəbullar</span><span class="metric-icon peach">◷</span><strong id="today-count">0</strong><small>Bu gün üçün planlaşdırılan</small></article></div>
+        <div class="panel"><div class="panel-title"><div><h2>Son növbələr</h2><p>Ən son qeydiyyata alınan müraciətlər</p></div><button class="text-button" data-jump="appointments">Hamısına bax →</button></div><div class="table-scroll" id="recent-table"></div></div>
+      </section>
+      <section class="page-section" id="section-patients"><div class="page-heading"><div><span class="eyebrow">KARTOTEKA</span><h1>Pasiyentlər</h1><p>Növbə üçün qeydiyyatdan keçmiş pasiyentlər.</p></div></div><div class="panel"><div class="panel-title"><div><h2>Pasiyent siyahısı</h2><p>Siyahı növbə müraciətlərindən avtomatik formalaşır.</p></div></div><div class="table-scroll" id="patients-table"></div></div></section>
+      <section class="page-section" id="section-appointments"><div class="page-heading"><div><span class="eyebrow">QƏBULLARIN İDARƏSİ</span><h1>Növbələr</h1><p>Yeni qəbul əlavə edin, mövcud növbələri idarə edin.</p></div></div><div class="panel form-panel"><div class="panel-title"><div><h2>Yeni növbə əlavə et</h2><p>Demo üçün nümunə pasiyent məlumatlarından istifadə edin.</p></div></div><form id="appointment-form" class="form-grid"><div class="form-field"><label for="p-name">Pasiyentin adı</label><input id="p-name" required placeholder="Ad və soyad"></div><div class="form-field"><label for="p-phone">Telefon</label><input id="p-phone" type="tel" required placeholder="+994 50 000 00 00"></div><div class="form-field"><label for="doctor-select">Həkim</label><select id="doctor-select" required></select></div><div class="form-field"><label for="appointment-date">Tarix</label><input id="appointment-date" type="date" required></div><div class="form-field"><label for="appointment-time">Saat</label><select id="appointment-time" required><option value="">Saat seçin</option></select></div><div class="form-actions"><button class="button primary-button" type="submit">Növbəni yarat</button></div></form></div><div class="panel"><div class="panel-title"><div><h2>Bütün növbələr</h2><p>Müraciətlərin statusunu buradan dəyişə bilərsiniz.</p></div><span class="count-pill" id="appointment-total">0</span></div><div class="table-scroll" id="appointments-table"></div></div></section>
+      <section class="page-section" id="section-doctors"><div class="page-heading"><div><span class="eyebrow">MÜTƏXƏSSİSLƏR</span><h1>Həkimlər</h1><p>Klinikanın həkim heyətinə baxın və yeni həkim əlavə edin.</p></div></div><div class="panel form-panel"><div class="panel-title"><div><h2>Həkim əlavə et</h2><p>Yeni mütəxəssisin adını və ixtisasını qeyd edin.</p></div></div><form id="doctor-form" class="form-grid"><div class="form-field"><label for="doctor-name">Həkimin adı</label><input id="doctor-name" required placeholder="Dr. Ad Soyad"></div><div class="form-field"><label for="doctor-specialty">İxtisas</label><input id="doctor-specialty" required placeholder="Məsələn, Terapevt"></div><div class="form-actions"><button class="button primary-button" type="submit">＋ Həkim əlavə et</button></div></form></div><div class="doctor-grid" id="doctors-grid"></div></section>
+      <section class="page-section" id="section-schedule"><div class="page-heading"><div><span class="eyebrow">QƏBUL PLANLAMASI</span><h1>Qəbul saatları</h1><p>Həkimlərin həftəlik iş qrafikinin demo görünüşü.</p></div></div><div class="panel"><div class="panel-title"><div><h2>Həftəlik iş qrafiki</h2><p>Nümunə iş saatları: bazar ertəsi–cümə, 09:00–17:00.</p></div></div><div class="table-scroll" id="schedule-table"></div></div><div class="info-banner"><strong>Layihə qeydi</strong><p>Bu prototip brauzerdə işləyir. Bulud bazası və real giriş sistemi əlavə ediləndə qrafik məlumatları serverdə saxlanıla bilər.</p></div></section>
+      <footer class="page-footer">MediQ · Klinikada növbə sistemi <span>Demo layihə</span></footer>
+    </main>
+  </div>
+  <nav class="bottom-nav"><button class="side-link selected" data-section="overview"><span>⌂</span>İcmal</button><button class="side-link" data-section="patients"><span>♙</span>Pasiyent</button><button class="side-link" data-section="appointments"><span>▤</span>Növbə</button><button class="side-link" data-section="doctors"><span>✚</span>Həkim</button><button class="side-link" data-section="schedule"><span>◷</span>Saatlar</button></nav>
+  <div class="toast" id="toast" aria-live="polite"></div>
+  <script src="dashboard.js"></script>
+</body>
+</html>
