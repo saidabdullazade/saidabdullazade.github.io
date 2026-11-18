@@ -1,1 +1,36 @@
+name: Container vulnerability scan
 
+'on':
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get project files
+        uses: actions/checkout@v4
+
+      - name: Prepare image builder
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build MediQ container image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: mediq-site:latest
+
+      - name: Scan image with Trivy
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: mediq-site:latest
+          format: table
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
